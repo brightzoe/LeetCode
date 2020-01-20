@@ -54,7 +54,8 @@
 var toLowerCase = function(str) {
   for (let i = 0; i < str.length; i++){
     if (str[ i ].charCodeAt(0) >= 65 && str[ i ].charCodeAt(0) <= 91) {
-      str.replace(str[i],String.fromCharCode(i + 32))
+      let t = str[ i ].charCodeAt(0)
+      str = str.replace(str[i],String.fromCharCode(t + 32))
     }
   }
   return str
