@@ -18,16 +18,25 @@
  */
 var mergeKLists = function (lists) {
   if (lists.length == 0) {
-    return;
+    return null
   }
   if (lists.length == 1) {
     return lists[0];
-	}
-	if (lists.length == 2) {
-		return merge2lists(lists[0], lists[1])
-	}
-	let mid = lists.length / 2 
-	
+  }
+  if (lists.length == 2) {
+    return merge2lists(lists[0], lists[1]);
+  }
+  //分治
+  let mid = lists.length >> 1;
+  let l1 = [];
+  for (let i = 0; i < mid; i++) {
+    l1[i] = lists[i];
+  }
+  let l2 = [];
+  for (let i = mid, j = 0; i < lists.length; i++, j++) {
+    l2[j] = lists[i];
+  }
+  return merge2lists(mergeKLists(l1), mergeKLists(l2));
 };
 function merge2lists(l1, l2) {
   if (!l1) {
@@ -40,10 +49,10 @@ function merge2lists(l1, l2) {
   let node = head;
   while (l1 && l2) {
     if (l1.val < l2.val) {
-      node.val = l1;
+      node.next = l1;
       l1 = l1.next;
     } else {
-      node.val = l2;
+      node.next = l2;
       l2 = l2.next;
     }
     node = node.next;
